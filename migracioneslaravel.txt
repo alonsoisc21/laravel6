@@ -1,0 +1,80 @@
+
+Mando	                                                        Descripción
+$table->bigIncrements('id');                                	Columna equivalente de incremento automático SIN FIRMAR BIGINT (clave principal).
+$table->bigInteger('votes');                                	BIGINT columna equivalente.
+$table->binary('data');                             	        BLOB columna equivalente.
+$table->boolean('confirmed');                               	Columna equivalente booleana.
+$table->char('name', 100);                              	    Columna CHAR equivalente con una longitud.
+$table->date('created_at');                             	    FECHA columna equivalente.
+$table->dateTime('created_at', 0);                              DATETIME columna equivalente con precisión (dígitos totales).
+$table->dateTimeTz('created_at', 0);                            DATETIME (con zona horaria) columna equivalente con precisión (dígitos totales).
+$table->decimal('amount', 8, 2);                                DECIMAL columna equivalente con precisión (dígitos totales) y escala (dígitos decimales).
+$table->double('amount', 8, 2);                             	DOBLE columna equivalente con precisión (dígitos totales) y escala (dígitos decimales).
+$table->enum('level', ['easy', 'hard']);                        ENUM columna equivalente.
+$table->float('amount', 8, 2);                              	FLOAT columna equivalente con precisión (dígitos totales) y escala (dígitos decimales).
+$table->geometry('positions');                              	GEOMETRÍA columna equivalente.
+$table->geometryCollection('positions');                        GEOMETRYCOLLECTION columna equivalente.
+$table->increments('id');                                      	Columna equivalente INTEGER SIN FIRMAR (clave primaria) de incremento automático.
+$table->integer('votes');                                   	INTEGER columna equivalente.
+$table->ipAddress('visitor');                               	Columna equivalente a la dirección IP.
+$table->json('options');                                       	Columna JSON equivalente.
+$table->jsonb('options');                                    	Columna equivalente JSONB.
+$table->lineString('positions');                              	Columna equivalente de LINESTRING.
+$table->longText('description');                               	Columna equivalente LONGTEXT.
+$table->macAddress('device');                               	Columna equivalente a la dirección MAC.
+$table->mediumIncrements('id');                             	Auto-incrementing UNSIGNED MEDIUMINT (primary key) equivalent column.
+$table->mediumInteger('votes');                             	MEDIUMINT equivalent column.
+$table->mediumText('description');                            	MEDIUMTEXT equivalent column.
+$table->morphs('taggable');                                    	Adds taggable_id UNSIGNED BIGINT and taggable_type VARCHAR equivalent columns.
+$table->uuidMorphs('taggable');                             	Adds taggable_id CHAR(36) and taggable_type VARCHAR(255) UUID equivalent columns.
+$table->multiLineString('positions');                          	MULTILINESTRING equivalent column.
+$table->multiPoint('positions');                              	MULTIPOINT equivalent column.
+$table->multiPolygon('positions');                             	MULTIPOLYGON equivalent column.
+$table->nullableMorphs('taggable');                            	Adds nullable versions of morphs() columns.
+$table->nullableUuidMorphs('taggable');                        	Adds nullable versions of uuidMorphs() columns.
+$table->nullableTimestamps(0);                              	Alias of timestamps() method.
+$table->point('position');                                  	POINT equivalent column.
+$table->polygon('positions');                               	POLYGON equivalent column.
+$table->rememberToken();                                	    Adds a nullable remember_token VARCHAR(100) equivalent column.
+$table->set('flavors', ['strawberry', 'vanilla']);              SET equivalent column.
+$table->smallIncrements('id');                              	Auto-incrementing UNSIGNED SMALLINT (primary key) equivalent column.
+$table->smallInteger('votes');                              	SMALLINT equivalent column.
+$table->softDeletes(0);                                        	Adds a nullable deleted_at TIMESTAMP equivalent column for soft deletes with precision (total digits).
+$table->softDeletesTz(0);                                   	Adds a nullable deleted_at TIMESTAMP (with timezone) equivalent column for soft deletes with precision (total digits).
+$table->string('name', 100);                                	VARCHAR equivalent column with a length.
+$table->text('description');                                	TEXT equivalent column.
+$table->time('sunrise', 0);                                 	TIME equivalent column with precision (total digits).
+$table->timeTz('sunrise', 0);                               	TIME (with timezone) equivalent column with precision (total digits).
+$table->timestamp('added_on', 0);                              	TIMESTAMP equivalent column with precision (total digits).
+$table->timestampTz('added_on', 0);                            	TIMESTAMP (with timezone) equivalent column with precision (total digits).
+$table->timestamps(0);                                      	Adds nullable created_at and updated_at TIMESTAMP equivalent columns with precision (total digits).
+$table->timestampsTz(0);                                    	Adds nullable created_at and updated_at TIMESTAMP (with timezone) equivalent columns with precision (total digits).
+$table->tinyIncrements('id');                               	Auto-incrementing UNSIGNED TINYINT (primary key) equivalent column.
+$table->tinyInteger('votes');                               	TINYINT equivalent column.
+$table->unsignedBigInteger('votes');                           	UNSIGNED BIGINT equivalent column.
+$table->unsignedDecimal('amount', 8, 2);                       	UNSIGNED DECIMAL equivalent column with a precision (total digits) and scale (decimal digits).
+$table->unsignedInteger('votes');                              	UNSIGNED INTEGER equivalent column.
+$table->unsignedMediumInteger('votes');                        	UNSIGNED MEDIUMINT equivalent column.
+$table->unsignedSmallInteger('votes');                         	UNSIGNED SMALLINT equivalent column.
+$table->unsignedTinyInteger('votes');                          	UNSIGNED TINYINT equivalent column.
+$table->uuid('id');                                            	UUID equivalent column.
+$table->year('birth_year');                                 	YEAR equivalent column.
+
+
+
+Modificador	                                                    Descripción
+->after('column')	                                            Coloque la columna "después" de otra columna (MySQL)
+->autoIncrement()	                                            Establecer columnas INTEGER como incremento automático (clave primaria)
+->charset('utf8')	                                            Especifique un juego de caracteres para la columna (MySQL)
+->collation('utf8_unicode_ci')	                                Especifique una clasificación para la columna (MySQL / PostgreSQL / SQL Server)
+->comment('my comment')	                                        Agregar un comentario a una columna (MySQL / PostgreSQL)
+->default($value)	                                            Especifique un valor "predeterminado" para la columna
+->first()	                                                    Coloque la columna "primero" en la tabla (MySQL)
+->nullable($value = true)	                                    Permite (por defecto) insertar valores NULL en la columna
+->storedAs($expression)	                                        Crear una columna generada almacenada (MySQL)
+->unsigned()	                                                Establecer columnas INTEGER como UNSIGNED (MySQL)
+->useCurrent()	                                                Establezca las columnas TIMESTAMP para usar CURRENT_TIMESTAMP como valor predeterminado
+->virtualAs($expression)	                                    Crear una columna virtual generada (MySQL)
+->generatedAs($expression)	                                    Crear una columna de identidad con opciones de secuencia especificadas (PostgreSQL)
+->always()	                                                    Define la precedencia de los valores de secuencia sobre la entrada para una columna de identidad (PostgreSQL)
+

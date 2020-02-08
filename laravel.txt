@@ -1,0 +1,125 @@
+php artisan make:controller /*Nombre del controlador*/              //Crea controlador
+php artisan migrate                                                 //Migra las tablas de database/migrations 
+php artisan migrate:rollback                                        //Elimina la migración de BD
+php artisan migrate:refresh                                         //Elimina la migración de y actualiza BD
+php artisan make:model /*Nombre del modelo*/                        //Crea modelo
+php artisan make:model /*Nombre del modelo*/ --migrate              //Crea modelo y su migración
+php artisan make:model /*Nombre del modelo*/ --m                    //Crea modelo y su migración
+php artisan make:auth                                               //Para autenticar usuarios 
+php artisan make:controller /*Nombredel controlador*/ --resource    //Crea automaticamente funciones del controlador y rutas en Route::resource('/ruta','Nombre del controlador*/);
+php artisan make:migration create_relacion1_relacion2_table --create= nombre de la tabla    //Crea la migración de la tabla pivote
+php artisan make:seeder nombrearchivoseeders                        //Genera archivo para seeder, en el archivo databaseseeder descomentar y agregar nombre del archivo
+php artisan db:seed                                                 //Inserta en la base de datos
+php artisan migrate:fresh --seed                                    //Migra la BD y crea las inserciones  ***** Recomendable borrar toda la BD*****
+/******************RUTAS******************RUTAS******************RUTAS******************RUTAS******************/
+Ruta que devuelve vista
+    Route::get('inicio', function(){
+        return view ('vistainicio);
+    });
+
+Ruta que devuelve vista sin ejecutar función
+    Route::view('inicio','mombredelarchivodelavista');
+
+Ruta a la que se le asigna un nombre
+    Route::get('inicio', function(){
+        return view ('vistainicio);
+    })->name('inicio');sumo 
+
+Ruta que envia parametros
+    Route::get('inicio', function(){
+        $variables=['var1','var2','var3'];
+        return view ('vistainicio,['variables'=>$variables]);
+        return view ('vistainicio,compact('variables'));
+    })->name('inicio');
+
+Ruta a la que se le concatena y envia parametros
+    Route::get('inicio/{$variable2}', function(){
+        $variables=['var1','var2','var3'];
+        return view ('vistainicio,['variables'=>$variables, 'variable2'=>$variable2]);
+        return view ('vistainicio,compact('variables','variable2'));
+    })->name('inicio');
+
+Ruta a la que se le puede o no concatenar y enviar parametros
+    Route::get('inicio/{$variable2?}', function($variable=null){
+        $variables=['var1','var2','var3'];
+        return view ('vistainicio,['variables'=>$variables, 'variable2'=>$variable2]);
+        return view ('vistainicio,compact('variables','variable2'));
+    })->name('inicio');
+
+    Route::put('ruta/{variable}', 'NombreControlador@Nombredefunción')->name(?Nombre de ruta);
+    Route::delete('ruta/{variable}', 'NombreControlador@Nombredefunción')->name(?Nombre de ruta);
+
+/******************BLADE******************BLADE******************BLADE******************BLADE******************/
+Vinculo a otra ruta
+    <a href="{{ route('nombredelavista') }}"></a>
+
+Vinculo a otra ruta con parametro
+    <a href="{{ route('nombredelavista', $variable) }}"></a> 
+
+/----------Estructuras de Control------------/
+Recorre la variable y crea los elementos
+    @foreach ($variable as $item)
+        <span>{{$item}}}
+    @enforech
+
+Valida si Existe la variable
+    @if (empty($variable))
+        <p>Existe</p>
+    @endif
+        <p>No existe</p>  
+
+Evalua los casos
+    @switch($variable)
+        @case($variable == '')
+            <p>caso uno</p>
+        @break
+        @case($bariable == '')
+            <p>caso dos</p>
+        @break
+    @endswitch
+
+@error('nombreinput')
+    <p>Error de dato al validar desde controlador</p>
+@enderror
+
+@if (session('nombre mensaje de validación'))
+    <p>{{ session('mensaje error') }}/p>
+@endif
+
+<form action="{{route('nombreruta')}}" method="POST">@csrf</form>
+<form action="{{route('nombreruta', parametros)}}" method="POST">@method ('PUT') @csrf</form>
+<form action="{{route('nombreruta', parametros)}}" method="POST">@method ('DELETE') @csrf</form>
+
+{{$variable->links()}}                                                                   //Para paginar
+
+{{$item->fecha->format('d M Y')}}                                                        //usando carbon en el modelo
+{{$item->nombreModelo->Dato}}                                                            //Accede al dato requerido de otra tabla
+
+/******************ELOQUENT******************ELOQUENT******************ELOQUENT******************ELOQUENT******************/
+$variable = App\Modelo::all();                                                            //Retorna todos los datos de la tabla
+$variable = App\Modelo::find($parametro);                                                 //Busca el dato dentro del Modelo
+$variable = App\Modelo::findOrFail($parametro);                                           //Busta el dato dentro del modelo y valida si existe, si no existe redirije al 404
+$variable = App\Modelo::paginate(numerodedatos);                                          //Para paginar desde consulta
+$variablemodelo->save();                                                                  //Guarda los datos
+$variablemodelo->delete();                                                                //Elimina los datos de ese id
+return $this->belongsTo(/*Nombre del Modelo*/::class);                                    //Pertenece a el modelo(uno a muchos) https://laravel.com/docs/6.x/eloquent-relationships
+return $this->belongsToMany(/*Nombre del Modelo*/::class);                                //Pertenece a el modelo(muchos a muchos) https://laravel.com/docs/6.x/eloquent-relationships
+use carbon                                                                                //Permite trabajar formatos de fecha
+$table->bigInteger('user_id')->unsigned();                                                //Relación con el modelo /*Forma 1*/ *****al integrar llaves foraneas     ******
+$table->unsignedBigInteger('user_id');                                                    //Relacion con el modelo /*Forma 2*/ *****hay que eliminar el truncate    ******
+$table->foreign('user_id')->references('id')->on('users');                                //llave foraneas                     *****del seeder para que no marque error **
+
+/***************CONTROLADOR***************CONTROLADOR***************CONTROLADOR***************CONTROLADOR******************/
+return back()                                                                             //Retorna a la pagina anterior.
+$request->validate(['namedeinput' => 'required', 'namedeinput1' => 'required'])           //Valida valor de input en el controlador
+auth()->user();                                                                           //Retorna datos del usuario logueado
+auth()->user()->datodeusuario;                                                            //Retorna el dato seleccionado
+Auth::logout();                                                                           //Metodo para cerrar sesión
+Auth::logoutCurrentDevice();                                                              //Cerrar sesión en el dispositivo actual
+Auth::logoutOtherDevices();                                                               //Cerrar sesión en todos los dispositivos
+
+/***************SEEDER***************SEEDER***************SEEDER***************SEEDER******************/
+$variable::truncate();                                                                    //Evita duplicar datos cada que se ejecuta el seeder
+$variable = new /*Nombre Modelo*/();                                                      //Se crea el nuevo registro                 
+$variable->campo = "contenido del campo";                                                 //se agrega el valor
+$variable->save();                                                                        //se almacena el dato en BD
